@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Budget Planner</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="index.html" class="active">Dashboard</a>
+            <a href="transactions.html">Transactions</a>
+            <a href="credit-card.html">Credit Card</a>
+            <a href="summary.html">Summary</a>
+        </nav>
+
+        <div class="dashboard-header">
+            <div class="current-balance">
+                <h2><i class="fas fa-wallet"></i> Current Balance</h2>
+                <div id="currentBalance">₱0.00</div>
+            </div>
+        </div>
+
+        <div class="filter-container">
+            <div class="date-filter">
+                <div class="filter-group">
+                    <label for="month"><i class="fas fa-calendar-alt"></i> Month:</label>
+                    <select id="month" onchange="updateDashboard()">
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+
+                    <label for="year"><i class="fas fa-calendar-check"></i> Year:</label>
+                    <select id="year" onchange="updateDashboard()">
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3><i class="fas fa-shopping-cart"></i> Expenses</h3>
+                <div id="expenses-total" class="total-amount">₱0.00</div>
+                <div id="expenses-list" class="category-list"></div>
+            </div>
+
+            <div class="dashboard-card">
+                <h3><i class="fas fa-piggy-bank"></i> Savings</h3>
+                <div id="savings-total" class="total-amount">₱0.00</div>
+                <div id="savings-list" class="category-list"></div>
+            </div>
+
+            <div class="dashboard-card">
+                <h3><i class="fas fa-hand-holding-usd"></i> Debts</h3>
+                <div id="loans-total" class="total-amount">₱0.00</div>
+                <div id="loans-list" class="category-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income - Budget Planner</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="index.html">Dashboard</a>
+            <a href="transactions.html">Transactions</a>
+            <a href="income.html" class="active">Income</a>
+        </nav>
+
+        <div class="page-header">
+            <h1>Income</h1>
+            <button class="add-btn" onclick="openAddIncomeModal()">Add Income</button>
+        </div>
+
+        <div class="transactions-filter">
+            <div class="filter-group">
+                <label for="month">Month:</label>
+                <select id="month" onchange="filterIncome()">
+                    <!-- Will be populated by JavaScript -->
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="year">Year:</label>
+                <select id="year" onchange="filterIncome()">
+                    <!-- Will be populated by JavaScript -->
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="company">Company:</label>
+                <select id="company" onchange="filterIncome()">
+                    <option value="all">All Companies</option>
+                    <!-- Will be populated by JavaScript -->
+                </select>
+            </div>
+        </div>
+
+        <div class="income-list" id="incomeList">
+            <!-- Income items will be populated here -->
+        </div>
+
+        <div class="total-section">
+            <div class="total-amount">
+                Total Income: <span id="totalIncome">₱0.00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Income Modal -->
+    <div id="addIncomeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Income</h2>
+                <span class="close" onclick="closeAddIncomeModal()">&times;</span>
+            </div>
+            <form id="incomeForm" onsubmit="addIncome(event)">
+                <div class="form-group">
+                    <label for="incomeAmount">Amount:</label>
+                    <input type="number" id="incomeAmount" required step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="incomeCompany">Company:</label>
+                    <input type="text" id="incomeCompany" required>
+                </div>
+                <div class="form-group">
+                    <label for="incomeDescription">Description:</label>
+                    <input type="text" id="incomeDescription" required>
+                </div>
+                <div class="form-group">
+                    <label for="incomeDate">Date:</label>
+                    <input type="date" id="incomeDate" required>
+                </div>
+                <button type="submit" class="submit-btn">Add Income</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

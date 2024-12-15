@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions - Budget Planner</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="transactions.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="index.html">Dashboard</a>
+            <a href="transactions.html" class="active">Transactions</a>
+            <a href="credit-card.html">Credit Card</a>
+            <a href="summary.html">Summary</a>
+        </nav>
+
+        <div class="transactions-header">
+            <div class="action-buttons">
+                <button onclick="openAddExpenseModal()" class="action-btn primary">
+                    <i class="fas fa-minus-circle"></i> Add Expense
+                </button>
+                <button onclick="openAddSavingsModal()" class="action-btn success">
+                    <i class="fas fa-piggy-bank"></i> Add Savings
+                </button>
+                <button onclick="openAddLoanModal()" class="action-btn secondary">
+                    <i class="fas fa-hand-holding-usd"></i> Add Debts
+                </button>
+            </div>
+        </div>
+
+        <div class="transactions-filter">
+            <div class="filter-group">
+                <label><i class="fas fa-calendar-alt"></i> Month:</label>
+                <select id="month" onchange="filterTransactions()">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+
+                <label><i class="fas fa-calendar-check"></i> Year:</label>
+                <select id="year" onchange="filterTransactions()">
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                </select>
+
+                <label><i class="fas fa-filter"></i> Type:</label>
+                <select id="transactionType" onchange="filterTransactions()">
+                    <option value="all">All</option>
+                    <option value="expense">Expenses</option>
+                    <option value="savings">Savings</option>
+                    <option value="loan">Debts</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="transactions-list">
+            <h2><i class="fas fa-list"></i> Transactions</h2>
+            <div id="transactionsList"></div>
+        </div>
+    </div>
+
+    <!-- Add Expense Modal -->
+    <div id="addExpenseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-minus-circle"></i> Add Expense</h2>
+            </div>
+            <div class="modal-body">
+                <form id="expenseForm">
+                    <div class="form-group">
+                        <label for="expenseMainType">Main Type:</label>
+                        <select id="expenseMainType" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseCategory">Category:</label>
+                        <select id="expenseCategory" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseSubcategory">Subcategory:</label>
+                        <select id="expenseSubcategory" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseAmount">Amount:</label>
+                        <input type="number" id="expenseAmount" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseDate">Date:</label>
+                        <input type="date" id="expenseDate" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Add Expense</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Savings Modal -->
+    <div id="addSavingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-piggy-bank"></i> Add Savings</h2>
+            </div>
+            <div class="modal-body">
+                <form id="savingsForm">
+                    <div class="form-group">
+                        <label for="savingsMainType">Main Type:</label>
+                        <select id="savingsMainType" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="savingsCategory">Category:</label>
+                        <select id="savingsCategory" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="savingsSubcategory">Subcategory:</label>
+                        <select id="savingsSubcategory" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="savingsAmount">Amount:</label>
+                        <input type="number" id="savingsAmount" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="savingsDate">Date:</label>
+                        <input type="date" id="savingsDate" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Add Savings</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Loan Modal -->
+    <div id="addLoanModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-hand-holding-usd"></i> Add Debts</h2>
+            </div>
+            <div class="modal-body">
+                <form id="loanForm">
+                    <div class="form-group">
+                        <label for="loanMainType">Main Type:</label>
+                        <select id="loanMainType" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="loanCategory">Category:</label>
+                        <select id="loanCategory" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="loanSubcategory">Subcategory:</label>
+                        <select id="loanSubcategory" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="loanAmount">Amount:</label>
+                        <input type="number" id="loanAmount" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loanDate">Date:</label>
+                        <input type="date" id="loanDate" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Add Debts</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

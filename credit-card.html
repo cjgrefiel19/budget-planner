@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Expenses - Budget Planner</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="credit-card.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="navigation">
+            <a href="index.html">Dashboard</a>
+            <a href="transactions.html">Transactions</a>
+            <a href="credit-card.html" class="active">Credit Card</a>
+            <a href="summary.html">Summary</a>
+        </nav>
+
+        <div class="filter-container">
+            <div class="date-filter">
+                <div class="filter-group horizontal">
+                    <label for="month"><i class="fas fa-calendar-alt"></i> Month:</label>
+                    <select id="month" onchange="filterCreditCardExpenses()">
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                
+                    <label for="year"><i class="fas fa-calendar-check"></i> Year:</label>
+                    <select id="year" onchange="filterCreditCardExpenses()">
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                    </select>
+                </div>
+            </div>
+            <button class="add-btn" onclick="showAddCreditCardModal()">
+                <i class="fas fa-plus"></i> Add Credit Card Expense
+            </button>
+        </div>
+
+        <div class="credit-summary">
+            <div class="summary-card">
+                <h3><i class="fas fa-credit-card"></i> Total Credit Card Expenses</h3>
+                <div id="totalCreditCardExpenses" class="amount negative">₱0.00</div>
+            </div>
+        </div>
+
+        <div class="credit-expenses-section">
+            <div id="creditCardExpensesList" class="transactions-list">
+                <!-- Credit card expenses will be listed here -->
+            </div>
+        </div>
+
+        <!-- Add Credit Card Expense Modal -->
+        <div id="creditCardExpenseModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-plus-circle"></i> Add Credit Card Expense</h2>
+                    <span class="close" onclick="hideAddCreditCardModal()">&times;</span>
+                </div>
+                <form id="creditCardExpenseForm" onsubmit="handleAddCreditCardExpense(event)">
+                    <div class="form-group">
+                        <label for="expenseDate"><i class="fas fa-calendar"></i> Date:</label>
+                        <input type="date" id="expenseDate" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="creditCard"><i class="fas fa-credit-card"></i> Credit Card:</label>
+                        <select id="creditCard" name="creditCard" required>
+                            <option value="">Select a card</option>
+                            <option value="Security Bank">Security Bank</option>
+                            <option value="Citi Grab">Citi Grab</option>
+                            <option value="Citi Simplicity">Citi Simplicity</option>
+                            <option value="BDO Shopmore">BDO Shopmore</option>
+                            <option value="BDO Installment">BDO Installment</option>
+                            <option value="RCBC Classic">RCBC Classic</option>
+                            <option value="Citibank Simplicity">Citibank Simplicity</option>
+                            <option value="Eastwest">Eastwest</option>
+                            <option value="Robinson">Robinson</option>
+                            <option value="PNB">PNB</option>
+                            <option value="BPI Credit Card">BPI Credit Card</option>
+                            <option value="UB Cashback">UB Cashback</option>
+                            <option value="RCBC JCB">RCBC JCB</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="merchant"><i class="fas fa-store"></i> Merchant:</label>
+                        <input type="text" id="merchant" name="merchant" required placeholder="Enter merchant name">
+                    </div>
+                    <div class="form-group">
+                        <label for="amount"><i class="fas fa-money-bill-wave"></i> Amount:</label>
+                        <input type="number" id="amount" name="amount" required step="0.01" min="0" placeholder="Enter amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="installments"><i class="fas fa-clock"></i> Installments:</label>
+                        <input type="number" id="installments" name="installments" required min="1" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="description"><i class="fas fa-sticky-note"></i> Description:</label>
+                        <input type="text" id="description" name="description" placeholder="Enter description (optional)">
+                    </div>
+                    <button type="submit" class="submit-btn">Add Expense</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
